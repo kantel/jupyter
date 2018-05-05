@@ -46,10 +46,19 @@ Zur Berechnung des Lyanpunov-Exponenten initialisieren wir als erstes den `lyapu
 lyapunov = np.zeros(n)
 ```
 
+Und nun noch die Plots ein wenig aufhübschen:
+
+
+```python
+plt.style.use("ggplot")
+```
+
 Nun folgt das eigentliche Programm:
 
 
 ```python
+plt.subplots_adjust(hspace = 0.6)
+
 plt.subplot(211)
 for i in range(iterations):
     x = logistic(r, x)
@@ -70,7 +79,14 @@ plt.title("Lyapunov-Exponent")
 ```
 
 
-![png](figure_1.png)
+
+
+    <matplotlib.text.Text at 0x11ab2d208>
+
+
+
+
+![png](output_16_1.png)
 
 
 Wir sehen einen Fixpunkt bei `r < 3.0` und der Lyapunov-Exponent ist positiv (hier in rot markiert), wenn das System chaotisch wird.

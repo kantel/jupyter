@@ -14,6 +14,9 @@ x = 1e-5 * np.ones(n)
 
 lyapunov = np.zeros(n)
 
+plt.style.use("ggplot")
+plt.subplots_adjust(hspace = 0.4)
+
 plt.subplot(211)
 for i in range(iterations):
     x = logistic(r, x)
