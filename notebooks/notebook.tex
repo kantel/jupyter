@@ -286,23 +286,23 @@ Lyapunov-Exponenten}\label{feigenbaum-diagramm-mit-lyapunov-exponenten}
     Zuerst importieren wir die benötigten Pakete Numpy und die Matplotlib
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}33}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
-         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
-         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
 \end{Verbatim}
 
 
     Dann implementieren wir die logistische Funktion
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{def} \PY{n+nf}{logistic}\PY{p}{(}\PY{n}{r}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{:}
-             \PY{k}{return} \PY{n}{r}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{logistic}\PY{p}{(}\PY{n}{r}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{r}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}
 \end{Verbatim}
 
 Zur Berechnung der Funktion wird ein Array mit 10.000 Werten implementiert, die zwischen 2,5 und 4 gleichverteilt sind:
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{10000}
-         \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mf}{4.0}\PY{p}{,} \PY{n}{n}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{10000}
+        \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mf}{4.0}\PY{p}{,} \PY{n}{n}\PY{p}{)}
 \end{Verbatim}
 
 
@@ -311,15 +311,15 @@ durchlaufen und die letzten 100 sollen für das Bifurkations-Diagramm
 genutzt werden.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{1000}
-         \PY{n}{last} \PY{o}{=} \PY{l+m+mi}{100}
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{1000}
+        \PY{n}{last} \PY{o}{=} \PY{l+m+mi}{100}
 \end{Verbatim}
 
 
     Wir initialisieren das System mit \(x_0 = 0.00001\):
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{n}\PY{p}{)}
 \end{Verbatim}
 
 
@@ -327,42 +327,42 @@ genutzt werden.
 den \texttt{lyapunov}-Vektor:
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{lyapunov} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{lyapunov} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n}\PY{p}{)}
 \end{Verbatim}
 
 
     Und nun noch die Plots ein wenig aufhübschen:
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ggplot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ggplot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \end{Verbatim}
 
 
     Nun folgt das eigentliche Programm:
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace} \PY{o}{=} \PY{l+m+mf}{0.6}\PY{p}{)}
-         
-         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{211}\PY{p}{)}
-         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iterations}\PY{p}{)}\PY{p}{:}
-             \PY{n}{x} \PY{o}{=} \PY{n}{logistic}\PY{p}{(}\PY{n}{r}\PY{p}{,} \PY{n}{x}\PY{p}{)}
-             \PY{n}{lyapunov} \PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{r} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{r}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{p}{)}
-             \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{p}{(}\PY{n}{iterations} \PY{o}{\PYZhy{}} \PY{n}{last}\PY{p}{)}\PY{p}{:}
-                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{r}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.02}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Feigenbaum\PYZhy{}Diagramm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
-         
-         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{212}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{r}\PY{p}{[}\PY{n}{lyapunov} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{lyapunov}\PY{p}{[}\PY{n}{lyapunov} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{n}{iterations}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{r}\PY{p}{[}\PY{n}{lyapunov} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{lyapunov}\PY{p}{[}\PY{n}{lyapunov} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n}{iterations}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.25}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mf}{4.0}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lyapunov\PYZhy{}Exponent}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace} \PY{o}{=} \PY{l+m+mf}{0.6}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{211}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iterations}\PY{p}{)}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{n}{logistic}\PY{p}{(}\PY{n}{r}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+            \PY{n}{lyapunov} \PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{r} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{r}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+            \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{p}{(}\PY{n}{iterations} \PY{o}{\PYZhy{}} \PY{n}{last}\PY{p}{)}\PY{p}{:}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{r}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.02}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Feigenbaum\PYZhy{}Diagramm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{212}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{r}\PY{p}{[}\PY{n}{lyapunov} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{lyapunov}\PY{p}{[}\PY{n}{lyapunov} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{n}{iterations}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{r}\PY{p}{[}\PY{n}{lyapunov} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{lyapunov}\PY{p}{[}\PY{n}{lyapunov} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n}{iterations}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.25}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mf}{4.0}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lyapunov\PYZhy{}Exponent}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}40}]:} <matplotlib.text.Text at 0x11ab2d208>
+{\color{outcolor}Out[{\color{outcolor}8}]:} Text(0.5,1,'Lyapunov-Exponent')
 \end{Verbatim}
             
     \begin{center}
